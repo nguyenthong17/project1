@@ -21,16 +21,12 @@ class Game {
             speed: 3, 
             type: 'airplane', 
             width: 150, 
-            height: 75,
-            x: width,
-            y: Math.floor(525 * Math.random())},
+            height: 75},
             {image: loadImage('images/obstacle/helicopter.png'), 
             speed: 1.5, 
             type: 'helicopter', 
             width: 100, 
-            height: 50,
-            x: Math.floor(700 * Math.random()),
-            y: height}
+            height: 50}
         ]
     }
     draw(){
@@ -39,11 +35,18 @@ class Game {
         this.character.draw();
         let random = Math.floor(100 * Math.random())
         let result = random % 2;
-        if (frameCount % 10) {            
+        if (frameCount % 45 === 0) {            
                 this.obstacles.push(new Obstacle(
-                    this.obstacleImages[result].image
-                    ))            
+                    this.obstacleImages[result].image,
+                    this.obstacleImages[result].speed,
+                    this.obstacleImages[result].type,
+                    this.obstacleImages[result].width,
+                    this.obstacleImages[result].height
+                    )) 
+                    // console.log(this.obstacleImages[result].type,
+                    //             this.obstacleImages[result].x,
+                    //             this.obstacleImages[result].y)           
         }
-        console.log(this.obstacleImages[result].x)
+        
     }
 }

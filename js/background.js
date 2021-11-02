@@ -8,5 +8,6 @@ class Background {
                 img.x = 0;
             }
         })
+        console.log(width, height)
     }
 }
