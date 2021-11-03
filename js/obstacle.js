@@ -20,10 +20,26 @@ class Obstacle {
             this.x -= this.speed;
         }
         if (this.type === 'helicopter') {
-            this.x -= (this.speed * 3);
-            this.y -= this.speed;
+            this.x -= (this.speed * 2.5);
+            this.y -= (this.speed * 1.5);
         }
         image(this.image, this.x, this.y, this.width, this.height)
+    }
+
+    collision(characterInfo) {
+        let charCenterX = characterInfo.charx  + characterInfo.width/2;
+        let charCenterY = characterInfo.chary + characterInfo.height/2;
+
+        let obsCenterX = this.x + this.width/2;
+        let obsCenterY = this.y + this.height/2;
+        //console.log(obsCenterY)
+        if ((dist(obsCenterX,obsCenterY, charCenterX, charCenterY) > 40 && this.type === 'helicopter') || 
+        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 60 && this.type === 'airplane') {
+            return false;
+        } else {            
+            return true;
+        }
+
     }
     
 }

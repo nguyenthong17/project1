@@ -7,7 +7,8 @@ class Game {
     constructor () {
         this.backgroundImages;
         this.characterImage;
-        this.obstacleImages;        
+        this.obstacleImages;
+        this.hit = false;        
     }
     preload() {
         this.backgroundImages =[
@@ -23,7 +24,7 @@ class Game {
             width: 150, 
             height: 75},
             {image: loadImage('images/obstacle/helicopter.png'), 
-            speed: 2, 
+            speed: 3, 
             type: 'helicopter', 
             width: 100, 
             height: 50}
@@ -36,21 +37,35 @@ class Game {
         
         let random = Math.floor(100 * Math.random())
         let result = random % 2;
-        if (frameCount % 45 === 0) {            
+        if (frameCount % 10 === 0) {            
                 this.obstacles.push(new Obstacle(
                     this.obstacleImages[result].image,
                     this.obstacleImages[result].speed,
                     this.obstacleImages[result].type,
                     this.obstacleImages[result].width,
                     this.obstacleImages[result].height
-                    )) 
-                    console.log(this.obstacles.length)     
+                    ))      
         }
     
-        this.obstacles.forEach( (obstacle) => {
-            obstacle.draw()
+        this.obstacles.forEach( obstacle => {
+            obstacle.draw()            
         })
         
-        this.obstacles.filter()
+        this.obstacles = this.obstacles.filter(obstacle => {
+            if (obstacle.x < 0 - obstacle.width || obstacle.y < 0 - obstacle.height){
+                return false;
+            } else {
+                return true
+            }
+        })
+
+        this.obstacles.forEach(obstacle => {
+            if (obstacle.collision(this.character)) {
+                noLoop();
+                this.hit = true;
+            }
+        })
+
+
     }
 }
