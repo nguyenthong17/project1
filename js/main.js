@@ -24,8 +24,8 @@ function draw() {
         textFont('Rampart One');
         textSize(40);
         fill(255, 255, 255);
-        text(str, 250, 300);
-        text(instruction,200,350)       
+        text(str, 200, 300);
+        text(instruction,150,350)       
     }
     
     if (game.hit === true) {
