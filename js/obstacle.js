@@ -6,12 +6,16 @@ class Obstacle {
         this.width = obswidth;
         this.height = obsheight;
         if (this.type === 'helicopter') {
-            this.x = Math.floor((width -this.width) * Math.random());
+            this.x =width/2 + Math.floor((width/2 -this.width) * Math.random());
             this.y = height;
         }
         if (this.type === 'airplane') {
             this.x = width;
             this.y = Math.floor((height - this.height) * Math.random());
+        }
+        if (this.type === 'meteor') {
+            this.x =width/3 + Math.floor((width/2 -this.width) * Math.random());
+            this.y = 0;
         }
     }
 
@@ -20,8 +24,12 @@ class Obstacle {
             this.x -= this.speed;
         }
         if (this.type === 'helicopter') {
-            this.x -= (this.speed * 2.5);
-            this.y -= (this.speed * 1.5);
+            this.x -= (this.speed * 3);
+            this.y -= (this.speed * 1);
+        }
+        if (this.type === 'meteor'){
+            this.x -= (this.speed);
+            this.y += (this.speed * 0.5)
         }
         image(this.image, this.x, this.y, this.width, this.height)
     }
@@ -31,15 +39,15 @@ class Obstacle {
         let charCenterY = characterInfo.chary + characterInfo.height/2;
 
         let obsCenterX = this.x + this.width/2;
-        let obsCenterY = this.y + this.height/2;
-        //console.log(obsCenterY)
+        let obsCenterY = this.y + this.height/2;        
+        
         if ((dist(obsCenterX,obsCenterY, charCenterX, charCenterY) > 40 && this.type === 'helicopter') || 
-        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 60 && this.type === 'airplane') {
+        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 60 && this.type === 'airplane' ||
+        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 50 && this.type === 'meteor') {
             return false;
         } else {            
             return true;
-        }
-
+        }        
     }
     
 }

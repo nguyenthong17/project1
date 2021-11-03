@@ -9,3 +9,34 @@ body {
 canvas {
   background-color: black;
 }
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: right;
+}
+.sc {
+  background-color: grey;
+  font-size: 30;
+  margin: 0;
+  padding: 5px;
+  text-align: right;
+}
+
+#score {
+  color: orangered;
+  font-weight: bolder;
+  font-size: 50;
+}
+
+.hit {
+  animation: flashing 2s infinite;
+}
+
+@keyframes flashing {
+  50% {
+    color: black;
+    background-color: orangered;
+  }
+}

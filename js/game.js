@@ -8,7 +8,8 @@ class Game {
         this.backgroundImages;
         this.characterImage;
         this.obstacleImages;
-        this.hit = false;        
+        this.hit = false; 
+        this.score = 0;
     }
     preload() {
         this.backgroundImages =[
@@ -27,7 +28,13 @@ class Game {
             speed: 3, 
             type: 'helicopter', 
             width: 100, 
-            height: 50}
+            height: 50},
+            {image: loadImage('images/obstacle/meteor.gif'),
+            speed: 12,
+            type: 'meteor',
+            width:50,
+            height: 50,
+            }
         ]
     }
     draw(){
@@ -35,9 +42,10 @@ class Game {
         this.background.draw();
         this.character.draw();
         
+         
         let random = Math.floor(100 * Math.random())
-        let result = random % 2;
-        if (frameCount % 10 === 0) {            
+        let result = random % 3;
+        if (frameCount % 8 === 0) {            
                 this.obstacles.push(new Obstacle(
                     this.obstacleImages[result].image,
                     this.obstacleImages[result].speed,
@@ -46,26 +54,32 @@ class Game {
                     this.obstacleImages[result].height
                     ))      
         }
-    
+        
         this.obstacles.forEach( obstacle => {
             obstacle.draw()            
         })
         
         this.obstacles = this.obstacles.filter(obstacle => {
-            if (obstacle.x < 0 - obstacle.width || obstacle.y < 0 - obstacle.height){
+            if (obstacle.x < 0 - obstacle.width || 
+                obstacle.y < 0 - obstacle.height){
                 return false;
             } else {
-                return true
+                return true;
             }
         })
 
         this.obstacles.forEach(obstacle => {
             if (obstacle.collision(this.character)) {
                 noLoop();
-                this.hit = true;
+                this.hit = true;                       
             }
         })
-
-
+        
+        if (frameCount % 30 === 0) {
+            this.score ++            
+        }
+        
     }
+
+    
 }
