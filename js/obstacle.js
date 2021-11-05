@@ -42,8 +42,8 @@ class Obstacle {
         let obsCenterY = this.y + this.height/2;        
         
         if ((dist(obsCenterX,obsCenterY, charCenterX, charCenterY) > 40 && this.type === 'helicopter') || 
-        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 60 && this.type === 'airplane' ||
-        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 50 && this.type === 'meteor') {
+        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 50 && this.type === 'airplane' ||
+        (dist(obsCenterX,obsCenterY, charCenterX, charCenterY)) > 40 && this.type === 'meteor') {
             return false;
         } else {            
             return true;
